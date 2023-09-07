@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/soal1', function () {
+    return view('soal.soal1');
+});
+
+Route::get('/soal2', function () {
+    return view('soal.soal2');
 });
