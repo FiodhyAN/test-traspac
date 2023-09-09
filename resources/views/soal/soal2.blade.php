@@ -101,21 +101,21 @@
                 const text = $('#text').val();
                 const kata = $('#kata-pilihan').val();
                 const ganti = $('#ganti-kata').val();
-                const words = splitText(text);
-
-                for (let i = 0; i < words.length; i++) {
-                    if (words[i].toLowerCase() === kata.toLowerCase()) {
-                        words[i] = ganti;
+                const pattern = new RegExp(`\\b${kata}\\b`, 'gi');
+                const newText = text.replace(pattern, function(match) {
+                    const hasNonWordChar = /[^a-zA-Z0-9]/.test(match);
+                    if (hasNonWordChar) {
+                        return match.replace(kata, ganti);
+                    } else {
+                        return ganti;
                     }
-                }
-
-                $('#sorted-text').html(words.join(' '));
+                });
+                $('#sorted-text').html(newText);
                 $('#modalGanti').modal('hide');
                 $('#kata-pilihan').val('');
                 $('#ganti-kata').val('');
             });
 
-            // Sort words in the text
             $('#sort').click(function() {
                 const text = $('#text').val();
                 const words = splitText(text);
