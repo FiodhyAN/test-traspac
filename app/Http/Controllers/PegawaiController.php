@@ -12,6 +12,11 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PegawaiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $unit = Unit::all();

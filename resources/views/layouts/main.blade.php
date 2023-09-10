@@ -110,6 +110,43 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $('#logout').on('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will be logged out of the system!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, logout!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // href="/logout"
+                    $.ajax({
+                        url: '/logout',
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf_token"]').attr('content')
+                        },
+                        success: function(data) {
+                            Swal.fire(
+                                'Logged Out!',
+                                'You have been logged out of the system.',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "/";
+                                }
+                            })
+                        }
+                    });
+                }
+            })
+        });
+    </script>
     @yield('script')
 
 </body>

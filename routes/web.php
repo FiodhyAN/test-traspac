@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('login');
-});
+})->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/soal1', [PegawaiController::class, 'index']);
 Route::post('/addUnit', [PegawaiController::class, 'addUnit']);
@@ -30,4 +33,4 @@ Route::get('/downloadPDF', [PegawaiController::class, 'downloadPDF']);
 
 Route::get('/soal2', function () {
     return view('soal.soal2');
-});
+})->middleware('auth');
