@@ -26,6 +26,7 @@ Route::get('/pegawaiTable', [PegawaiController::class, 'pegawaiTable']);
 Route::get('/getPegawai', [PegawaiController::class, 'getPegawai']);
 Route::put('/updatePegawai', [PegawaiController::class, 'updatePegawai']);
 Route::delete('/deletePegawai', [PegawaiController::class, 'deletePegawai']);
+Route::get('/downloadPDF', [PegawaiController::class, 'downloadPDF']);
 
 Route::get('/soal2', function () {
     return view('soal.soal2');

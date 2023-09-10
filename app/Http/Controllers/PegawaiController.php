@@ -6,9 +6,9 @@ use App\Models\Pegawai;
 use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PegawaiController extends Controller
 {
@@ -367,5 +367,18 @@ class PegawaiController extends Controller
                 'error' => $th->getMessage(),
             ], 422);
         }
+    }
+
+    public function downloadPDF()
+    {
+        if (request()->unit && request()->unit != 'all_unit') {
+            $pegawais = Pegawai::with('unit')->where('unit_id', request()->unit)->orderBy('id', 'asc')->get();
+        } else {
+            $pegawais = Pegawai::with('unit')->orderBy('id', 'asc')->get();
+        }
+        $pdf = PDF::loadview('soal.soal1_pdf', [
+            'pegawais' => $pegawais,
+        ])->setPaper('a4', 'landscape');
+        return $pdf->stream('Pegawai.pdf', array('Attachment' => false));
     }
 }

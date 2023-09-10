@@ -298,7 +298,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </div>
                 </div>
             </div>
@@ -336,7 +336,7 @@
                     data-bs-target="#tambahPegawaiModal">
                     <i class="fas fa-user-plus"></i>
                     Tambah Data</button>
-                <button class="btn btn-warning float-right mr-2">
+                <button class="btn btn-warning float-right mr-2" id="cetakPDF">
                     <i class="fas fa-print"></i>
                     Cetak Laporan</button>
             </div>
@@ -839,6 +839,11 @@
                 }
             })
 
+        })
+
+        $('#cetakPDF').on('click', function() {
+            const unit = $('#select-unit').val();
+            window.open('/downloadPDF?unit=' + unit, '_blank');
         })
     </script>
 @endsection
