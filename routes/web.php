@@ -23,6 +23,9 @@ Route::post('/addUnit', [PegawaiController::class, 'addUnit']);
 Route::get('/getUnit', [PegawaiController::class, 'getUnit']);
 Route::post('/addPegawai', [PegawaiController::class, 'addPegawai']);
 Route::get('/pegawaiTable', [PegawaiController::class, 'pegawaiTable']);
+Route::get('/getPegawai', [PegawaiController::class, 'getPegawai']);
+Route::put('/updatePegawai', [PegawaiController::class, 'updatePegawai']);
+Route::delete('/deletePegawai', [PegawaiController::class, 'deletePegawai']);
 
 Route::get('/soal2', function () {
     return view('soal.soal2');
