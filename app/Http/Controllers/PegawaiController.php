@@ -162,7 +162,7 @@ class PegawaiController extends Controller
         }
 
         if ($request->nip) {
-            $query = DB::table('users')->whereRaw('LOWER(nip) = ?', strtolower($request->nip))->first();
+            $query = DB::table('pegawais')->whereRaw('LOWER(nip) = ?', strtolower($request->nip))->first();
             if ($query) {
                 return response()->json([
                     'message' => 'NIP sudah ada',
@@ -250,11 +250,14 @@ class PegawaiController extends Controller
         }
 
         if ($request->nip) {
-            $query = DB::table('users')->whereRaw('LOWER(nip) = ?', strtolower($request->nip))->first();
-            if ($query) {
-                return response()->json([
-                    'message' => 'NIP sudah ada',
-                ], 422);
+            $pegawai = DB::table('pegawais')->where('id', $request->id)->first();
+            if ($pegawai->nip != $request->nip) {
+                $query = DB::table('pegawais')->whereRaw('LOWER(nip) = ?', strtolower($request->nip))->first();
+                if ($query) {
+                    return response()->json([
+                        'message' => 'NIP sudah ada',
+                    ], 422);
+                }
             }
         }
         if ($request->hasFile('foto')) {

@@ -81,7 +81,11 @@
                     <td>{{ $p->jabatan }}</td>
                     <td>{{ $p->tempat_tugas }}</td>
                     <td>{{ $p->agama }}</td>
-                    <td>{{ $p->unit->nama }}</td>
+                    <td>
+                        @if ($p->unit)
+                            {{ $p->unit->nama }}
+                        @endif
+                    </td>
                     <td>{{ $p->no_hp }}</td>
                     <td>{{ $p->npwp }}</td>
                 </tr>
