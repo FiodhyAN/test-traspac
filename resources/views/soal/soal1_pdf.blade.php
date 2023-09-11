@@ -74,7 +74,11 @@
                     <td>{{ $p->nama }}</td>
                     <td>{{ $p->tempat_lahir }}</td>
                     <td>{{ $p->alamat }}</td>
-                    <td>{{ date('d-m-Y', strtotime($p->tanggal_lahir)) }}</td>
+                    <td>
+                        @if ($p->tanggal_lahir)
+                            {{ date('d-m-Y', strtotime($p->tanggal_lahir)) }}
+                        @endif
+                    </td>
                     <td>{{ $p->jenis_kelamin }}</td>
                     <td>{{ $p->golongan }}</td>
                     <td>{{ $p->eselon }}</td>
